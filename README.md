@@ -1,1 +1,2 @@
-"# Linux_Server_Operations_Toolkit" 
+## Status
+🚧 Work in progress — currently building core foundation (logging, config).
