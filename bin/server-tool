@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [ $# -lt 2 ]; then
+    echo "Usage: $0 <noun> <verb> [options]" >&2
+    exit 1
+fi
+
+noun="$1"
+shift
+verb="$1"
+shift
+
+echo "Noun: $noun"
+echo "Verb: $verb"
+echo "Remaining arguments: $@"
+
+declare -A COMMANDS
+COMMANDS["service.restart"]="service_restart"
+COMMANDS["service.status"]="service_status"
+COMMANDS["user.create"]="user_create"
+
+key="${noun}.${verb}"
+if [[ -n "${COMMANDS[$key]}" ]]; then
+    "${COMMANDS[$key]}" "$@"
+else
+    echo "Error: Command '$key' not found." >&2
+    exit 1
+fi
